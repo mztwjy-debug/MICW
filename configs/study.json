@@ -1,0 +1,102 @@
+{
+  "models": [
+    "multiscale_transformer",
+    "transformer",
+    "patchtst",
+    "itransformer"
+  ],
+  "features": {
+    "absolute_dimensions": 84,
+    "relative_dimensions": 84,
+    "reference_seconds": 300,
+    "window_seconds": 60,
+    "relative_epsilon": 1e-06,
+    "validity_channels": true
+  },
+  "training": {
+    "seeds": [
+      42,
+      7,
+      123
+    ],
+    "validation_seed": 42,
+    "validation_fraction": 0.2,
+    "sequence_length": 20,
+    "max_epochs": 18,
+    "patience": 5,
+    "batch_size": 64,
+    "optimizer": "Adam",
+    "learning_rate": 0.001,
+    "loss": "weighted_cross_entropy",
+    "label_smoothing": 0.05
+  },
+  "evaluation": {
+    "primary": "minute_index > 5",
+    "bootstrap_draws": 10000,
+    "bootstrap_seed": 20261114,
+    "bootstrap_unit": "participant",
+    "seed_standard_deviation_ddof": 1
+  },
+  "sensitivities": [
+    {
+      "name": "no_bp",
+      "variant": "absolute_plus_relative_delta",
+      "mask": "bp",
+      "dataset": "main"
+    },
+    {
+      "name": "absolute_only",
+      "variant": "absolute_only",
+      "mask": "none",
+      "dataset": "main"
+    },
+    {
+      "name": "relative_only",
+      "variant": "relative_delta",
+      "mask": "none",
+      "dataset": "main"
+    },
+    {
+      "name": "no_electro",
+      "variant": "absolute_plus_relative_delta",
+      "mask": "electro",
+      "dataset": "main"
+    },
+    {
+      "name": "no_vitals",
+      "variant": "absolute_plus_relative_delta",
+      "mask": "vitals",
+      "dataset": "main"
+    },
+    {
+      "name": "missing20",
+      "variant": "absolute_plus_relative_delta",
+      "mask": "missing20",
+      "dataset": "main"
+    },
+    {
+      "name": "absolute_delta",
+      "variant": "absolute_plus_delta",
+      "mask": "none",
+      "dataset": "main"
+    },
+    {
+      "name": "absolute_zscore",
+      "variant": "absolute_plus_baseline_zscore",
+      "mask": "none",
+      "dataset": "main"
+    },
+    {
+      "name": "earlier_signal",
+      "variant": "absolute_plus_relative_delta",
+      "mask": "none",
+      "dataset": "earlier_signal"
+    },
+    {
+      "name": "missingness",
+      "variant": "absolute_plus_relative_delta",
+      "mask": "none",
+      "dataset": "missingness"
+    }
+  ]
+}
